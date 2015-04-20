@@ -1,0 +1,47 @@
+<input value='{{search}}'>
+{{#each filter(list)}}
+  <li>{{.}}</li>
+{{/each}}
+
+
+
+
+//in data within ractive
+filter: function(list){
+  var search = this.get('search');
+  if (!search) return list;
+
+  return list.filter(function(each) {
+    return each.startsWith(search);
+  });
+}
+
+/////////////////
+
+
+
+<input value='{{newItem}}'>
+<button on-click="addItem:{{newItem}}">add</button>
+
+{{#each items}}
+{{.}}
+{{/each}}
+
+ractive.on('addItem', function(event, newItem){
+  // use .push into items, a newItem
+});
+
+
+
+or
+addItem(newItem) //in both button & function within data
+
+
+
+//////////////
+
+
+// var ListItem = Ractive.extend({
+Ractive.components.listItem = Ractive.extend({
+  template: '#listItem'
+});
